@@ -17,7 +17,20 @@ def customer_tickets(conn, customer_id):
 
     Include only tickets purchased by the given customer_id.
     Order results by film title alphabetically.
+
+    Write a function that returns details of tickets purchased by a specific customer.
+
+    The function should return a list of tuples containing (in order):
+    - the film title
+    - the screen
+    - the ticket price
+
+    Results should be ordered alphabetically by film title.
     """
+
+    cur = conn.cursor()
+    res = cur.execute("SELECT films.title, screenings.screen,tickets.price FROM tickets JOIN screenings ON tickets.screening_id = screenings.screening_id JOIN films ON screenings.film_id = films.film_id WHERE tickets.customer_id ="+customer_id+" ORDER BY films.title ASC;")
+    res.fetchone()
     pass
 
 
